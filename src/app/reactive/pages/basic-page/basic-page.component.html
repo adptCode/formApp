@@ -1,0 +1,128 @@
+<h2>Reactivos: Básicos</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+
+        <form [formGroup]="myForm" (ngSubmit)="onSave()" autocomplete="off">
+
+            <!-- Campo de producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Producto</label>
+                <div class="col-sm-9">
+
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Nombre del producto"
+                           formControlName="name"
+                           [ngClass]="{'is-invalid': hasErrors('name', 'required') || hasErrors('name', 'minlength')}">
+
+
+                    @if (hasErrors('name', 'required')) {
+                        <span class="form-text text-danger">
+                        El campo es requierido
+                        </span>
+                    }
+                    @if (hasErrors('name', 'minlength')) {
+                        <span class="form-text text-danger">
+                        Debe ser de 3 letras
+                        </span>
+                    }
+
+                </div>
+            </div>
+
+            <!-- Campo de producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Precio</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control"
+                           placeholder="Precio del producto"
+                           formControlName="price"
+                           [ngClass]="{'is-invalid': hasErrors('price', 'required') || hasErrors('price', 'min')}">
+                          @if (hasErrors('price', 'required')) {
+                            <span class="form-text text-danger">
+                              El campo es requierido
+                            </span>
+                          }
+                          @if (hasErrors('price', 'min')) {
+                            <span class="form-text text-danger">
+                              El precio debe de ser 0 o mayor
+                            </span>
+                          }
+                </div>
+            </div>
+
+            <!-- Campo de existencias -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Existencias</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control"
+                           placeholder="Existencias del producto"
+                           formControlName="inStorage"
+                           [ngClass]="{'is-invalid': hasErrors('inStorage', 'required') || hasErrors('inStorage', 'min')}">
+                           @if (hasErrors('inStorage', 'required')) {
+                            <span class="form-text text-danger">
+                              El campo es requierido
+                            </span>
+                          }
+                          @if (hasErrors('inStorage', 'min')) {
+                            <span class="form-text text-danger">
+                              Las existencias deben de ser 0 o mayor
+                            </span>
+                          }
+
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit"
+                            class="btn btn-primary float-end">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+
+
+
+        </form>
+
+    </div>
+</div>
+
+
+
+
+<div class="row">
+    <div class="col">
+
+        <span>Valid</span>
+        <pre>{{ myForm.valid | json }}</pre>
+
+        <span>Pristine</span>
+        <pre>{{ myForm.pristine | json }}</pre>
+
+        <span>Touched</span>
+        <pre>{{ myForm.touched | json }}</pre>
+
+        <span>Value</span>
+        <pre>{{ myForm.value | json }}</pre>
+
+        <span>Precio</span>
+        <pre>{{ myForm.controls['price'].value | json }}</pre>
+
+        <span>Precio - Errors</span>
+        <pre>{{ myForm.controls['price'].errors | json }}</pre>
+
+        <span>Producto</span>
+        <pre>{{ myForm.controls['name'].value | json }}</pre>
+
+        <span>Producto - Errors</span>
+        <pre>{{ myForm.controls['name'].errors | json }}</pre>
+    </div>
+</div>
